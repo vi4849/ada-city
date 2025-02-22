@@ -3,6 +3,14 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.dispatch import receiver
+from django.core.files.storage import default_storage
+from config import API_KEY
+from inference_sdk import InferenceHTTPClient
+
+CLIENT = InferenceHTTPClient(
+    api_url="https://detect.roboflow.com",
+    api_key= API_KEY
+)
 
 def index(request):
     return render(request, "ada_app/home.html")
@@ -11,6 +19,17 @@ def about(request):
     return render(request, "ada_app/about.html")
 
 def upload(request):
+    if request.method == "POST":
+        # Handle file upload
+        file = request.FILES["imageFile"]
+        file_name = default_storage.save(file.name, file)
+        file_url = default_storage.path(file_name)
+
+        print(f"File saved at: {file_url}")
+
+        result = CLIENT.infer(file_url, model_id="accessibility-object-detection/2")
+        return render(request, "ada_app/upload.html", {"predictions": result})
+
     return render(request, "ada_app/upload.html")
 
 def browse(request):

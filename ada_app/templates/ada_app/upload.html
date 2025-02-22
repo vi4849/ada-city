@@ -4,10 +4,13 @@
 {% block content %}
 <div class = 'container'>
 
-<h3>Menu:</h3>
-<ul class = "list-group">
-    <li class = "list-group-item"><a href="#">Change Email</a></li>
-</ul>
-
+<h3>Upload an image to see if it is ADA accessible or not!</h3>
+<br>
+<form method="post" enctype ="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name ="imageFile" />
+    <input type="submit" name="submit" value="Upload" />
+</form>
+{{predictions}}
 </div>
 {% endblock %}
