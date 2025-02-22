@@ -1,21 +1,3 @@
-a{
-    color: var(--color3);
-}
-
-.list-group{
-    width:90%;
-}
-
-.list-group-item{
-    margin:auto;
-    width:70%
-}
-
-.navbar{
-    background-color:var(--color4);
-    color:white;
-}
-
 :root {
     --color1: #F2EFE7; /* Background color for containers */
     --color2: #9ACBD0; /* Page background color */
@@ -27,7 +9,7 @@ a{
 body {
     background-color: var(--color2);
     font-family: "Trebuchet MS", "Georgia", sans-serif;
-    font-size: var(--font-size);
+    font-size: var(--font-size, 16px); /* Default font size */
     margin: 0;
     padding: 0;
 }
@@ -40,23 +22,34 @@ html, body {
     margin: 5vh auto;
     width: 60%;
     padding: 2rem;
-    border: 2px solid var(--color4);
     border-radius: 10px;
     background-color: var(--color1);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.container > h2 {
+h2 {
     text-align: center;
     font-size: 2rem;
-    color: var(--color4);
-    margin-bottom: 1.5rem;
+    color: var(--color3); /* Accent color */
 }
 
-label {
-    display: block;
+.settings-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--color1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.settings-section h3 {
+    font-size: 1.5rem;
+    color: var(--color4); /* Primary color */
+}
+
+.settings-section p {
+    margin-top: 0.5rem;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    color: var(--color3); /* Accent color */
 }
 
 select {
@@ -71,9 +64,8 @@ select {
 
 .font-size-toggle {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Align buttons to the left */
     gap: 1rem; /* Add spacing between buttons */
-    margin-top: 1.5rem;
 }
 
 button {
@@ -90,8 +82,9 @@ button:hover {
     background-color: var(--color4);
 }
 
-button.save-button {
-    margin-top: 2rem; /* Add spacing above the Save button */
+.save-button {
+    display: block;
+    margin-top: 1rem; /* Add spacing above Save button */
 }
 
 footer {
@@ -114,6 +107,6 @@ footer {
 
 .navbar a:hover {
     color: var(--color4); /* Change link color on hover for interactivity */
-    background-color: var(--color2); /* Optional: Add a hover effect */
-    border-radius: 5px; /* Optional: Rounded corners on hover */
+    background-color: var(--color2); 
+    border-radius: 5px; 
 }

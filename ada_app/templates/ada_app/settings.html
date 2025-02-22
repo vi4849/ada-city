@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Accessibility Settings</h1>
-<form method="POST" action="{% url 'ada_app:update_settings' %}">
-    {% csrf_token %}
-    <label for="color_scheme">Color Scheme:</label>
-    <select id="color_scheme" name="color_scheme">
-        <option value="default">Default</option>
-        <option value="colorblind">Colorblind Friendly</option>
-    </select>
+<div class="container">
+    <h2>Accessibility Settings</h2>
 
-    <div class="font-size-toggle">
-        <button onclick="changeFontSize('small')">Small</button>
-        <button onclick="changeFontSize('medium')">Medium</button>
-        <button onclick="changeFontSize('large')">Large</button>
+    <!-- Section: Color Scheme -->
+    <div class="settings-section">
+        <h3>Color Scheme</h3>
+        <p>Customize the color scheme of the website:</p>
+        <form method="POST" action="{% url 'ada_app:update_settings' %}">
+            {% csrf_token %}
+            <label for="color-scheme">Choose a theme:</label>
+            <select id="color-scheme" name="color_scheme">
+                <option value="default" {% if request.session.color_scheme == "default" %}selected{% endif %}>Default</option>
+                <option value="colorblind" {% if request.session.color_scheme == "colorblind" %}selected{% endif %}>Colorblind</option>
+            </select>
+            <button type="submit" class="save-button">Apply Theme</button>
+        </form>
     </div>
 
-    <button type="submit">Save</button>
+    <!-- Section: Font Size -->
+    <div class="settings-section">
+        <h3>Font Size</h3>
+        <p>Adjust the font size for better readability:</p>
+        <form method="POST" action="{% url 'ada_app:update_settings' %}">
+            {% csrf_token %}
+            <div class="font-size-toggle">
+                <button type="submit" name="font_size" value="small">Small</button>
+                <button type="submit" name="font_size" value="medium">Medium</button>
+                <button type="submit" name="font_size" value="large">Large</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </form>
 {% endblock %}

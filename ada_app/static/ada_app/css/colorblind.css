@@ -1,14 +1,14 @@
 :root {
-    --color1: #F8F8F8;
-    --color2: #D6EAF8;
-    --color3: #2874A6;
-    --color4: #FF7F0E;
+    --color1: #F8F8F8; /* Container background */
+    --color2: #D6EAF8; /* Page background */
+    --color3: #2874A6; /* Accent color for links and buttons */
+    --color4: #FF7F0E; /* Primary color for borders and headers */
 }
 
 body {
     background-color: var(--color2);
     font-family: "Trebuchet MS", "Georgia", sans-serif;
-    font-size: var(--font-size);
+    font-size: var(--font-size, 16px); /* Default font size */
     margin: 0;
     padding: 0;
 }
@@ -21,25 +21,34 @@ html, body {
     margin: 5vh auto;
     width: 60%;
     padding: 2rem;
-    border: 2px solid var(--color4);
     border-radius: 10px;
     background-color: var(--color1);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.container > h2 {
+h2 {
     text-align: center;
     font-size: 2rem;
-    color: var(--color3);
-    margin-bottom: 1.5rem;
+    color: var(--color3); /* Accent color */
 }
 
+.settings-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--color1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
 
+.settings-section h3 {
+    font-size: 1.5rem;
+    color: var(--color4); /* Primary color */
+}
 
-label {
-    display: block;
+.settings-section p {
+    margin-top: 0.5rem;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    color: var(--color3); /* Accent color */
 }
 
 select {
@@ -54,9 +63,8 @@ select {
 
 .font-size-toggle {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Align buttons to the left */
     gap: 1rem; /* Add spacing between buttons */
-    margin-top: 1.5rem;
 }
 
 button {
@@ -73,15 +81,16 @@ button:hover {
     background-color: var(--color4);
 }
 
-button.save-button {
-    margin-top: 2rem; /* Add spacing above the Save button */
+.save-button {
+    display: block;
+    margin-top: 1rem; /* Add spacing above Save button */
 }
 
 footer {
     background-color: var(--color4);
     position: sticky;
     top: 100vh;
-    color:rgb(5, 3, 3);
+    color:white;
 }
 
 .navbar {
@@ -97,6 +106,6 @@ footer {
 
 .navbar a:hover {
     color: var(--color4); /* Change link color on hover for interactivity */
-    background-color: var(--color2); /* Optional: Add a hover effect */
-    border-radius: 5px; /* Optional: Rounded corners on hover */
+    background-color: var(--color2); 
+    border-radius: 5px; 
 }
