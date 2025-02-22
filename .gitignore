@@ -1,6 +1,12 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+db.sqlite3
+media
+config.py
+
+# Mac OS
+.DS_STORE
 
 # C extensions
 *.so
