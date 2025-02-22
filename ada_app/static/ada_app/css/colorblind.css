@@ -1,9 +1,8 @@
 :root {
-    --color1: #F2EFE7; /* Background color for containers */
-    --color2: #9ACBD0; /* Page background color */
-    --color3: #48A6A7; /* Accent color for links and buttons */
-    --color4: #2973B2; /* Primary color for borders and headers */
-    --font-size: 16px; /* Default font size */
+    --color1: #F8F8F8; /* Container background */
+    --color2: #D6EAF8; /* Page background */
+    --color3: #2874A6; /* Accent color for links and buttons */
+    --color4: #FF7F0E; /* Primary color for borders and headers */
 }
 
 body {

@@ -5,21 +5,78 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}ADA Accessibility App {% endblock %}</title>
+    <title>{% block title %}ADA Accessibility App{% endblock %}</title>
+    
     {% load static %}
     {% load bootstrap5 %}
+    
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <link rel = "stylesheet" href = "{% static 'ada_app/css/base_style.css' %}">
+    
+    <!-- Dynamically load CSS based on color scheme -->
+    {% if request.session.color_scheme == 'colorblind' %}
+        <link rel="stylesheet" href="{% static 'ada_app/css/colorblind.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'ada_app/css/base_style.css' %}">
+    {% endif %}
 </head>
 <body>
 
+
+<!-- Include Navbar -->
 {% include 'navbar.html' %}
 
+<!-- Main Content Block -->
 {% block content %}
-
 {% endblock %}
 
+<!-- Include Footer -->
 {% include 'footer.html' %}
+
+<!-- Add JavaScript for Font Size Toggle -->
+<script>
+function changeFontSize(size) {
+    let fontSize;
+
+    if (size === 'small') {
+        fontSize = '14px';
+    } else if (size === 'medium') {
+        fontSize = '18px';
+    } else if (size === 'large') {
+        fontSize = '22px';
+    }
+
+    // Apply the new font size to the root element
+    document.documentElement.style.setProperty('--font-size', fontSize);
+
+    // Highlight the selected button
+    const buttons = document.querySelectorAll('.font-size-toggle button');
+    buttons.forEach(button => button.classList.remove('selected'));
+    
+    const activeButton = document.querySelector(`button[onclick="changeFontSize('${size}')"]`);
+    if (activeButton) activeButton.classList.add('selected');
+
+    // Optionally save the user's preference in localStorage
+    localStorage.setItem('preferredFontSize', fontSize);
+}
+
+// Load the user's preferred font size on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedFontSize = localStorage.getItem('preferredFontSize');
+    
+    if (savedFontSize) {
+        document.documentElement.style.setProperty('--font-size', savedFontSize);
+
+        // Highlight the correct button based on saved preference
+        const size = savedFontSize === '14px' ? 'small' : savedFontSize === '16px' ? 'medium' : 'large';
+        const activeButton = document.querySelector(`button[onclick="changeFontSize('${size}')"]`);
+        if (activeButton) activeButton.classList.add('selected');
+        
+        console.log(`Loaded preferred font size from localStorage (${savedFontSize})`);
+      }
+});
+
+</script>
+
 </body>
 </html>
