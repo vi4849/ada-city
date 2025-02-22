@@ -4,10 +4,21 @@
 {% block content %}
 <div class = 'container'>
 
-<h3>Menu:</h3>
-<ul class = "list-group">
-    <li class = "list-group-item"><a href="#">Change Email</a></li>
-</ul>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.errors %}
+        <ul class="error-list">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <button type="submit">Upload File</button>
+    </form>
 
 </div>
+
 {% endblock %}
