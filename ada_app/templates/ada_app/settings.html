@@ -9,7 +9,13 @@
         <option value="default">Default</option>
         <option value="colorblind">Colorblind Friendly</option>
     </select>
+
+    <div class="font-size-toggle">
+        <button onclick="changeFontSize('small')">Small</button>
+        <button onclick="changeFontSize('medium')">Medium</button>
+        <button onclick="changeFontSize('large')">Large</button>
+    </div>
+
     <button type="submit">Save</button>
 </form>
-
 {% endblock %}
