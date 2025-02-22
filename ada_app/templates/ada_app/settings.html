@@ -13,7 +13,7 @@
             <label for="color-scheme">Choose a theme:</label>
             <select id="color-scheme" name="color_scheme">
                 <option value="default" {% if request.session.color_scheme == "default" %}selected{% endif %}>Default</option>
-                <option value="colorblind" {% if request.session.color_scheme == "colorblind" %}selected{% endif %}>Colorblind</option>
+                <option value="colorblind" {% if request.session.color_scheme == "colorblind" %}selected{% endif %}>Colorblind Friendly</option>
             </select>
             <button type="submit" class="save-button">Apply Theme</button>
         </form>
