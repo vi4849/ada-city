@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Accessibility Settings</h1>
+<form method="POST" action="{% url 'ada_app:update_settings' %}">
+    {% csrf_token %}
+    <label for="color_scheme">Color Scheme:</label>
+    <select id="color_scheme" name="color_scheme">
+        <option value="default">Default</option>
+        <option value="colorblind">Colorblind Friendly</option>
+    </select>
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

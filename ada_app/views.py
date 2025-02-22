@@ -15,3 +15,15 @@ def upload(request):
 
 def browse(request):
     return render(request, "ada_app/browse.html")
+
+def settings(request):
+    return render(request, 'ada_app/settings.html')
+
+def update_settings(request):
+    """Handle form submission for updating user preferences."""
+    if request.method == "POST":
+        color_scheme = request.POST.get("color_scheme")
+        # Save the preference in the session
+        request.session["color_scheme"] = color_scheme
+    # Render the settings page again after saving preferences
+    return render(request, "ada_app/settings.html")

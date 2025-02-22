@@ -10,7 +10,12 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <link rel = "stylesheet" href = "{% static 'ada_app/css/base_style.css' %}">
+    <link rel="stylesheet" 
+      href="{% if request.session.color_scheme == 'colorblind' %}
+                {% static 'ada_app/css/colorblind.css' %}
+            {% else %}
+                {% static 'ada_app/css/base_style.css' %}
+            {% endif %}">
 </head>
 <body>
 
