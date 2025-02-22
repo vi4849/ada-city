@@ -110,3 +110,7 @@ footer {
     background-color: var(--color2); 
     border-radius: 5px; 
 }
+
+button.selected {
+    background-color: var(--color4);
+}

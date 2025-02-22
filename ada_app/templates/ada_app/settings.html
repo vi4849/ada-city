@@ -20,18 +20,15 @@
     </div>
 
     <!-- Section: Font Size -->
-    <div class="settings-section">
-        <h3>Font Size</h3>
-        <p>Adjust the font size for better readability:</p>
-        <form method="POST" action="{% url 'ada_app:update_settings' %}">
-            {% csrf_token %}
-            <div class="font-size-toggle">
-                <button type="submit" name="font_size" value="small">Small</button>
-                <button type="submit" name="font_size" value="medium">Medium</button>
-                <button type="submit" name="font_size" value="large">Large</button>
-            </div>
-        </form>
-    </div>
+	<div class="settings-section">
+		<h3>Font Size</h3>
+		<p>Adjust the font size for better readability:</p>
+		<div class="font-size-toggle">
+			<button type="button" onclick="changeFontSize('small')" aria-label="Set font size to small">Small</button>
+			<button type="button" onclick="changeFontSize('medium')" aria-label="Set font size to medium">Medium</button>
+			<button type="button" onclick="changeFontSize('large')" aria-label="Set font size to large">Large</button>
+		</div>
+	</div>
 </div>
 
 </form>

@@ -35,31 +35,47 @@
 
 <!-- Add JavaScript for Font Size Toggle -->
 <script>
-    function changeFontSize(size) {
-        let fontSize;
+function changeFontSize(size) {
+    let fontSize;
 
-        if (size === 'small') {
-            fontSize = '14px';
-        } else if (size === 'medium') {
-            fontSize = '16px';
-        } else if (size === 'large') {
-            fontSize = '18px';
-        }
-
-        // Apply the new font size to the root element
-        document.documentElement.style.setProperty('--font-size', fontSize);
-
-        // Optionally save the user's preference in local storage
-        localStorage.setItem('preferredFontSize', fontSize);
+    if (size === 'small') {
+        fontSize = '14px';
+    } else if (size === 'medium') {
+        fontSize = '16px';
+    } else if (size === 'large') {
+        fontSize = '18px';
     }
 
-    // Load the user's preferred font size on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedFontSize = localStorage.getItem('preferredFontSize');
-        if (savedFontSize) {
-            document.documentElement.style.setProperty('--font-size', savedFontSize);
-        }
-    });
+    // Apply the new font size to the root element
+    document.documentElement.style.setProperty('--font-size', fontSize);
+
+    // Highlight the selected button
+    const buttons = document.querySelectorAll('.font-size-toggle button');
+    buttons.forEach(button => button.classList.remove('selected'));
+    
+    const activeButton = document.querySelector(`button[onclick="changeFontSize('${size}')"]`);
+    if (activeButton) activeButton.classList.add('selected');
+
+    // Optionally save the user's preference in localStorage
+    localStorage.setItem('preferredFontSize', fontSize);
+}
+
+// Load the user's preferred font size on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedFontSize = localStorage.getItem('preferredFontSize');
+    
+    if (savedFontSize) {
+        document.documentElement.style.setProperty('--font-size', savedFontSize);
+
+        // Highlight the correct button based on saved preference
+        const size = savedFontSize === '14px' ? 'small' : savedFontSize === '16px' ? 'medium' : 'large';
+        const activeButton = document.querySelector(`button[onclick="changeFontSize('${size}')"]`);
+        if (activeButton) activeButton.classList.add('selected');
+        
+        console.log(`Loaded preferred font size from localStorage (${savedFontSize})`);
+      }
+});
+
 </script>
 
 </body>
