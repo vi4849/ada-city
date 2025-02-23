@@ -23,8 +23,19 @@
 
     <h3>Results</h3>
     <img src="{{ image.file.url }}" alt="Uploaded Image" width="500px">
-    <p><strong>File Name:</strong> {{ image.file.name|cut:"images/" }}</p>
-    <p><strong>Uploaded At:</strong> {{ image.uploaded_at }}</p>
-    <p><strong>Prediction Summary:</strong> {{ description }}</p>
+    <br>
+    <strong>File Name:</strong> {{ image.file.name|cut:"images/" }}
+    <br>
+    <strong>Uploaded At:</strong> {{ image.uploaded_at }}
+    <br>
+    <br>
+    <strong>{{ description.message }}</strong>
+    {% if description.objects %}
+        <ul>
+            {% for obj in description.objects %}
+                <li>{{ obj.name }} ({{ obj.confidence }} confidence)</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
 {% endblock %}

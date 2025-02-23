@@ -38,21 +38,20 @@ def upload(request):
     else:
         form = ImageFileForm()
     return render(request, 'ada_app/upload.html', {'form': form})
-# Convert JSON-formatted prediction data into text description
+
+# Convert JSON-formatted prediction data into dictionary containing list of detected objects and their confidence levels
 def parse_predictions(prediction_data):
     predictions = prediction_data.get("predictions", [])
-    
+
     if not predictions:
-        return "No objects detected in the image."
-    
-    description = []
-    
-    for pred in predictions:
-        obj_class = pred.get("class", "unknown object")
-        confidence = round(pred.get("confidence", 0) * 100, 2)
-        description.append(f"Detected a {obj_class} with {confidence}% confidence.")
-    
-    return " ".join(description)
+        return {"message": "No accessibility-related objects were detected in the image.", "objects": []}
+
+    detected_objects = [
+        {"name": pred.get("class", "Unknown object"), "confidence": f"{pred.get('confidence', 0) * 100:.0f}%"}
+        for pred in predictions
+    ]
+
+    return {"message": "The following accessibility-related objects were detected in the image:", "objects": detected_objects}
 
 def results(request, image_id):
     image_instance = get_object_or_404(ImageFile, pk=image_id)
@@ -60,7 +59,7 @@ def results(request, image_id):
     # Retrieve prediction results from session
     prediction_data = request.session.get(f"predictions_{image_id}", {})
     
-    # Convert JSON predictions into a readable description
+    # Convert JSON predictions into dictionary
     description = parse_predictions(prediction_data)
 
     return render(
