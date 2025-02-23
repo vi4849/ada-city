@@ -31,7 +31,11 @@ def upload(request):
             
             # Send file URL to the API
             result = CLIENT.infer(file_url, model_id="accessibility-object-detection/2")
+            
+            # Store results in DB and session
             request.session[f"predictions_{current_image.id}"] = result
+            current_image.predictions = result
+            current_image.save()
             
             # Redirect to results page with the id for image that was just uploaded
             return redirect("ada_app:results", image_id=current_image.id)
@@ -75,8 +79,8 @@ def parse_predictions(prediction_json):
 def results(request, image_id):
     image_instance = get_object_or_404(ImageFile, pk=image_id)
     
-    # Retrieve prediction results from session
-    prediction_data = request.session.get(f"predictions_{image_id}", {})
+     # Get predictions from the database, fallback to session if needed
+    prediction_data = image_instance.predictions or request.session.get(f"predictions_{image_id}", {})
     
     # Convert JSON predictions into dictionary
     description = parse_predictions(prediction_data)

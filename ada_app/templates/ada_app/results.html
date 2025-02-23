@@ -20,6 +20,10 @@
         top: 0;
         left: 0;
     }
+    .file-info {
+        font-size: 12px;
+        color: #555;
+    }
 </style>
 
 <div class = 'container'>
@@ -37,21 +41,26 @@
         <canvas id="boundingBoxCanvas"></canvas>
     </div>
 
-    <!-- File Information -->
-    <p><strong>File Name:</strong> {{ image.file.name|cut:"images/" }}</p>
-    <p><strong>Uploaded At:</strong> {{ image.uploaded_at }}</p>
-
     <!-- Display Predictions -->
-    <p><strong>{{ description.message }}</strong></p>
-    {% if description.objects %}
-        <ul>
-            {% for obj in description.objects %}
-                <li>{{ obj.name }} ({{ obj.confidence }} confidence)</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No objects detected.</p>
-    {% endif %}
+    <div style="margin-top:1em;">
+        <p><strong style="color: #2973B2;">{{ description.message }}</strong></p>
+        {% if description.objects %}
+            <ul>
+                {% for obj in description.objects %}
+                    <li>{{ obj.name }} ({{ obj.confidence }} confidence)</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No objects detected.</p>
+        {% endif %}
+    </div>
+
+    <!-- File Information -->
+    <br>
+    <div class="file-info">
+        Results for {{ image.file.name|cut:"images/" }}. Uploaded at {{ image.uploaded_at }}
+        <br>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -74,7 +83,7 @@
                 const scaleY = image.height / imageHeight;
 
                 objects.forEach(obj => {
-                    ctx.strokeStyle = "red";
+                    ctx.strokeStyle = "blue";
                     ctx.lineWidth = 2;
                     ctx.strokeRect(
                         (obj.x - obj.width / 2) * scaleX,  // Adjust X to top-left
@@ -82,7 +91,7 @@
                         obj.width * scaleX,
                         obj.height * scaleY
                     );
-                    ctx.fillStyle = "red";
+                    ctx.fillStyle = "blue";
                     ctx.font = "14px Arial";
                     ctx.fillText(`${obj.name} (${obj.confidence})`, 
                         (obj.x - obj.width / 2) * scaleX, 
