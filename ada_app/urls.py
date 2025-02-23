@@ -11,4 +11,5 @@ urlpatterns = [
 	path("ada/", views.ada, name="ada"),
 	path('settings/', views.settings, name='settings'),
     path('update-settings/', views.update_settings, name='update_settings'),
+    path("results/<int:image_id>/", views.results, name="results"),
 ]

@@ -1,2 +1,9 @@
 Django
 django-bootstrap-v5
+whitenoise[brotli]
+asgiref
+sqlparse
+pillow
+django-storages
+boto3
+inference_sdk

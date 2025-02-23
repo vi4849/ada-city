@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<style>
+    .container back-button a {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        color: #2973B2;
+        text-decoration: none;
+    }
+</style>
+
+<div class = 'container'>
+    <a href="{% url 'ada_app:upload' %}" class="back-button" style="color: #2973B2;">
+        <i class="bi bi-arrow-left" style="padding-right:10px"></i>Back to Uploads Page
+    </a>
+    
+    <br>
+    <br>
+
+    <h3>Results</h3>
+    <img src="{{ image.file.url }}" alt="Uploaded Image" width="500px">
+    <p><strong>File Name:</strong> {{ image.file.name|cut:"images/" }}</p>
+    <p><strong>Uploaded At:</strong> {{ image.uploaded_at }}</p>
+    <p><strong>Prediction Summary:</strong> {{ description }}</p>
+</div>
+{% endblock %}
