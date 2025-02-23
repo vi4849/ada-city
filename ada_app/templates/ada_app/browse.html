@@ -3,10 +3,49 @@
 
 {% block content %}
 <div class = 'container'>
-
-<h3>Menu:</h3>
+{% load static %}
+<h3>Parks in Charlottesville:</h3> 
+<ul class = "list-group" style="padding-left: 20px;">
+    <li>Fully ADA Accessible Trails</li>
+        <ul>
+            <li>Riverview Park Riverview trail</li>
+            <li>Azalea Park trails</li>
+            <li>Pen Park entry path & fitness trail</li>
+            <li>Schenk's Greenway</li>
+            <li>Darden Towe Park river path</li>
+            <li>McGuffey Park</li>
+            <li>Meade Avenue/coal tower trail</li>
+            <li>Meadow Creek Parkway trails</li>
+            <li>Rives Park loop trail</li>
+            <li>Tonsler Park loop trail</li>
+        </ul>
+    <li>Non-ADA Accessible Trails</li>
+        <ul>
+            <li>Pen Park nature trail along river</li>
+            <li>Meadowcreek Gardens</li>
+            <li>Northeast Park/Davis field</li>
+            <li>McIntire Park nature trails</li>
+            <li>Greenleaf Park nature trails</li>
+            <li>Frys Springs Park</li>
+            <li>Jordan Park</li>
+            <li>Holmes Avenue</li>
+            <li>Moore&#8217;s Creek (Fry&#8217;s Springs area)</li>
+            <li>Ragged Mountain Natural Area</li>
+            <li>Ivy Creek Natural Area</li>
+            <li>Sugar Hollow</li>
+        </ul>
+</ul>
+<br>
+<h3>Routes @ University of Virginia:</h3>
 <ul class = "list-group">
-    <li class = "list-group-item"><a href="#">Change Email</a></li>
+    <img src="{% static 'ada_app/images/routes.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
+    <img src="{% static 'ada_app/images/key.png' %}" style="width: 200px; height: auto;" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
+</ul>
+<br>
+<h3>Ramps @ University of Virginia:</h3>
+<p>Blue dots indicate locations with ramps</p>
+<ul class = "list-group">
+    <img src="{% static 'ada_app/images/ramps.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
 </ul>
 
 </div>
