@@ -40,18 +40,37 @@ def upload(request):
     return render(request, 'ada_app/upload.html', {'form': form})
 
 # Convert JSON-formatted prediction data into dictionary containing list of detected objects and their confidence levels
-def parse_predictions(prediction_data):
-    predictions = prediction_data.get("predictions", [])
+def parse_predictions(prediction_json):
+    predictions = prediction_json.get("predictions", [])
+    image_data = prediction_json.get("image", {})
 
     if not predictions:
-        return {"message": "No accessibility-related objects were detected in the image.", "objects": []}
+        return {
+            "message": "No accessibility objects were detected in the image.",
+            "objects": [],
+            "image_width": image_data.get("width", 0),
+            "image_height": image_data.get("height", 0)
+        }
 
     detected_objects = [
-        {"name": pred.get("class", "Unknown object"), "confidence": f"{pred.get('confidence', 0) * 100:.0f}%"}
+        {
+            "name": pred.get("class", "Unknown object"),
+            "confidence": f"{pred.get('confidence', 0) * 100:.0f}%",
+            "x": pred.get("x", 0),
+            "y": pred.get("y", 0),
+            "width": pred.get("width", 0),
+            "height": pred.get("height", 0)
+        }
         for pred in predictions
     ]
 
-    return {"message": "The following accessibility-related objects were detected in the image:", "objects": detected_objects}
+    return {
+        "message": "The following accessibility objects were detected in the image:",
+        "objects": detected_objects,
+        "image_width": image_data.get("width", 0),
+        "image_height": image_data.get("height", 0)
+    }
+
 
 def results(request, image_id):
     image_instance = get_object_or_404(ImageFile, pk=image_id)

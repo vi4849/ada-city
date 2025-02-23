@@ -11,6 +11,15 @@
         color: #2973B2;
         text-decoration: none;
     }
+    .canvas-container {
+        position: relative;
+        display: inline-block;
+    }
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 </style>
 
 <div class = 'container'>
@@ -22,20 +31,66 @@
     <br>
 
     <h3>Results</h3>
-    <img src="{{ image.file.url }}" alt="Uploaded Image" width="500px">
-    <br>
-    <strong>File Name:</strong> {{ image.file.name|cut:"images/" }}
-    <br>
-    <strong>Uploaded At:</strong> {{ image.uploaded_at }}
-    <br>
-    <br>
-    <strong>{{ description.message }}</strong>
+
+    <div class="canvas-container">
+        <img id="uploadedImage" src="{{ image.file.url }}" alt="Uploaded Image" width="500px" class="img-fluid">
+        <canvas id="boundingBoxCanvas"></canvas>
+    </div>
+
+    <!-- File Information -->
+    <p><strong>File Name:</strong> {{ image.file.name|cut:"images/" }}</p>
+    <p><strong>Uploaded At:</strong> {{ image.uploaded_at }}</p>
+
+    <!-- Display Predictions -->
+    <p><strong>{{ description.message }}</strong></p>
     {% if description.objects %}
         <ul>
             {% for obj in description.objects %}
                 <li>{{ obj.name }} ({{ obj.confidence }} confidence)</li>
             {% endfor %}
         </ul>
+    {% else %}
+        <p>No objects detected.</p>
     {% endif %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const image = document.getElementById("uploadedImage");
+            const canvas = document.getElementById("boundingBoxCanvas");
+            const ctx = canvas.getContext("2d");
+
+            image.onload = function () {
+                // Set canvas size to match the image
+                canvas.width = image.width;
+                canvas.height = image.height;
+
+                // Bounding box data from Django
+                const objects = {{ description.objects|safe }};
+                const imageWidth = {{ description.image_width }};
+                const imageHeight = {{ description.image_height }};
+
+                // Scale factors to match displayed image size
+                const scaleX = image.width / imageWidth;
+                const scaleY = image.height / imageHeight;
+
+                objects.forEach(obj => {
+                    ctx.strokeStyle = "red";
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(
+                        (obj.x - obj.width / 2) * scaleX,  // Adjust X to top-left
+                        (obj.y - obj.height / 2) * scaleY, // Adjust Y to top-left
+                        obj.width * scaleX,
+                        obj.height * scaleY
+                    );
+                    ctx.fillStyle = "red";
+                    ctx.font = "14px Arial";
+                    ctx.fillText(`${obj.name} (${obj.confidence})`, 
+                        (obj.x - obj.width / 2) * scaleX, 
+                        (obj.y - obj.height / 2) * scaleY - 5
+                    );
+                });
+            };
+        });
+    </script>
 </div>
 {% endblock %}
