@@ -37,11 +37,19 @@ def upload(request):
             current_image.predictions = result
             current_image.save()
             
+            # Inster result in upload history in session
+            upload_history = request.session.get("upload_history", [])
+            upload_history.insert(0, {"id": current_image.id, "file_url": file_url})  
+            request.session["upload_history"] = upload_history[:5]
+            
             # Redirect to results page with the id for image that was just uploaded
             return redirect("ada_app:results", image_id=current_image.id)
     else:
         form = ImageFileForm()
-    return render(request, 'ada_app/upload.html', {'form': form})
+        
+    # Retrieve upload history from session
+    upload_history = request.session.get("upload_history", [])
+    return render(request, 'ada_app/upload.html', {"form": form, "upload_history": upload_history})
 
 # Convert JSON-formatted prediction data into dictionary containing list of detected objects and their confidence levels
 def parse_predictions(prediction_json):
