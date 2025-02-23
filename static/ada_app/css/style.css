@@ -1,61 +1,151 @@
 :root {
-    --color1: #F2EFE7;
-    --color2: #9ACBD0;
-    --color3: #48A6A7;
-    --color4: #2973B2;
+    --color1: #F2EFE7; /* Container background */
+    --color2: #9ACBD0; /* Page background */
+    --color3: #48A6A7; /* Accent color for links and buttons */
+    --color4: #2973B2; /* Primary color for borders and headers */
 }
 
-
-.container{
-    margin-top:5vh;
-    width: 70vw;
-    height: 60vh;
-
-    border: solid thick var(--color4);
-    border-radius:10px;
-    background-color:var(--color1);
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.container > h2,a{
-    text-align:center;
+body {
+    background: linear-gradient(to bottom, #D6EAF8, #F8F8F8);
     font-family: "Trebuchet MS", "Georgia", sans-serif;
-}
-
-a{
-    color: var(--color3);
-}
-
-.list-group{
-    width:90%;
-}
-
-.list-group-item{
-    margin:auto;
-    width:70%
-}
-
-.navbar{
-    background-color:var(--color4);
-    color:white;
-}
-
-body{
-    background-color:var(--color2);
+    font-size: var(--font-size, 16px);
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-    height:100vh;
+    height: 100vh;
 }
 
-footer{
-    background-color:var(--color4);
-    position:sticky;
-    top:100vh;
+a:hover {
+    text-decoration: underline; /* Simple underline effect */
+}
+
+.container {
+    margin: 5vh auto;
+    width: 60%;
+    padding: 2rem;
+    border-radius: 15px; /* More rounded corners */
+    background-color: var(--color1);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow for emphasis */
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--color3); /* Accent color */
+    border-bottom: 2px solid var(--color4);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.settings-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--color1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.settings-section h3 {
+    font-size: 1.5rem;
+    color: var(--color4); /* Primary color */
+}
+
+.settings-section p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: var(--color3); /* Accent color */
+}
+
+select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color3);
+    background-color: white;
+    font-size: 1rem;
+}
+
+.font-size-toggle {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 1rem; /* Add spacing between buttons */
+}
+
+button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color3);
+    color: white;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--color4);
+    transform: scale(1.05) !important; /* Slightly enlarges the button */
+}
+
+.save-button {
+    display: block;
+    margin-top: 1rem; /* Add spacing above Save button */
+}
+
+footer {
+    background-color: var(--color4);
+    position: sticky;
+    top: 100vh;
     color:white;
-    justify-content: center;
+	text-align: center;
+
+}
+.navbar {
+    background-color: var(--color4);
+    color: var(--color1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar a {
+    color: var(--color3); /* Adjust link color to make it visible */
+    text-decoration: none; /* Remove underline */
+    padding: 0.5rem 1rem; /* Add spacing for better readability */
+}
+
+.navbar a:hover {
+    color: var(--color4); /* Change link color on hover for interactivity */
+    background-color: var(--color2); 
+    border-radius: 5px; 
+}
+
+.navbar .nav-link.active {
+    background-color: var(--color3);
+    color: white;
+    border-radius: 5px; /* Rounded background */
+}
+
+button.selected {
+    background-color: var(--color4);
+}
+
+section {
+    margin-bottom: 3rem; /* Adds space between sections */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Increase width on smaller screens */
+        padding: 1.5rem;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        font-size: calc(var(--font-size) - 2px); /* Slightly smaller font size */
+     }
+
+     h2 {
+         font-size: calc(var(--font-size) * 1.5); /* Adjust header size */
+     }
 }

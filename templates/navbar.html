@@ -7,26 +7,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'ada_app:index' %}">Home</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'ada_app:index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ada_app:upload' %}">Upload</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'upload' %}active{% endif %}" href="{% url 'ada_app:upload' %}">Upload</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ada_app:browse' %}">Browse Locations</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'browse' %}active{% endif %}" href="{% url 'ada_app:browse' %}">Browse Locations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ada_app:about' %}">About Us</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'ada_app:about' %}">About Us</a>
                 </li>
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'ada_app:ada' %}">ADA Info</a>
-				</li>
-				
-				<li class="nav-item">
-                    <a class="nav-link" href="{% url 'ada_app:settings' %}">Settings</a>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'ada' %}active{% endif %}" href="{% url 'ada_app:ada' %}">ADA Info</a>
                 </li>
-				
-
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}" href="{% url 'ada_app:settings' %}">Settings</a>
+                </li>
             </ul>
         </div>
     </div>

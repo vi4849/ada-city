@@ -6,9 +6,9 @@
 }
 
 body {
-    background-color: var(--color2);
+    background: linear-gradient(to bottom, #D6EAF8, #F8F8F8);
     font-family: "Trebuchet MS", "Georgia", sans-serif;
-    font-size: var(--font-size, 16px); /* Default font size */
+    font-size: var(--font-size, 16px);
     margin: 0;
     padding: 0;
 }
@@ -17,20 +17,28 @@ html, body {
     height: 100vh;
 }
 
+a:hover {
+    text-decoration: underline; /* Simple underline effect */
+}
+
 .container {
     margin: 5vh auto;
     width: 60%;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 15px; /* More rounded corners */
     background-color: var(--color1);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow for emphasis */
 }
 
 h2 {
     text-align: center;
     font-size: 2rem;
     color: var(--color3); /* Accent color */
+    border-bottom: 2px solid var(--color4);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
+
 
 .settings-section {
     margin-top: 2rem;
@@ -75,10 +83,12 @@ button {
     cursor: pointer;
     background-color: var(--color3);
     color: white;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 button:hover {
     background-color: var(--color4);
+    transform: scale(1.05); /* Slightly enlarges the button */
 }
 
 .save-button {
@@ -91,25 +101,40 @@ footer {
     position: sticky;
     top: 100vh;
     color:white;
-}
+	text-align: center;
 
+}
 .navbar {
-    background-color: var(--color4); /* Keep the navbar background */
-    color: var(--color1); /* Use a contrasting color for text */
+    background-color: var(--color4);
+    color: var(--color1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.navbar a {
-    color: var(--color3); /* Adjust link color to make it visible */
-    text-decoration: none; /* Remove underline */
-    padding: 0.5rem 1rem; /* Add spacing for better readability */
+.navbar a:hover,
+.navbar .nav-link.active {
+    color: var(--color3); /* Change text color on hover and active state */
+    font-weight: bold; /* Make text bold */
+    background-color: transparent; /* Ensure no background color */
+    text-decoration: none; /* Ensure no underline */
 }
-
-.navbar a:hover {
-    color: var(--color4); /* Change link color on hover for interactivity */
-    background-color: var(--color2); 
-    border-radius: 5px; 
-}
-
 button.selected {
     background-color: var(--color4);
+}
+
+section {
+    margin-bottom: 3rem; /* Adds space between sections */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Increase width on smaller screens */
+        padding: 1.5rem;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        font-size: calc(var(--font-size) - 2px); /* Slightly smaller font size */
+     }
+
+     h2 {
+         font-size: calc(var(--font-size) * 1.5); /* Adjust header size */
+     }
 }
