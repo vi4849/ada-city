@@ -8,6 +8,7 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("upload/", views.upload, name="upload"),
     path("browse/", views.browse, name="browse"),
+	path("ada/", views.ada, name="ada"),
 	path('settings/', views.settings, name='settings'),
     path('update-settings/', views.update_settings, name='update_settings'),
 ]

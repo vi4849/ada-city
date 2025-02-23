@@ -19,6 +19,9 @@ def browse(request):
 def settings(request):
     return render(request, 'ada_app/settings.html')
 
+def ada(request):
+    return render(request, 'ada_app/ada.html')
+
 def update_settings(request):
     """Handle form submission for updating user preferences."""
     if request.method == "POST":
