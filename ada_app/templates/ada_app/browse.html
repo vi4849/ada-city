@@ -4,6 +4,18 @@
 {% block content %}
 <div class = 'container'>
 {% load static %}
+<h3>Routes @ University of Virginia:</h3>
+<ul class = "list-group">
+    <img src="{% static 'ada_app/images/routes.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
+    <img src="{% static 'ada_app/images/key.png' %}" style="width: 200px; height: auto;" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
+</ul>
+<br>
+<h3>Ramps @ University of Virginia:</h3>
+<p>Blue dots indicate locations with ramps</p>
+<ul class = "list-group">
+    <img src="{% static 'ada_app/images/ramps.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
+</ul>
+
 <h3>Parks in Charlottesville:</h3> 
 <ul class = "list-group" style="padding-left: 20px;">
     <li>Fully ADA Accessible Trails</li>
@@ -34,18 +46,6 @@
             <li>Ivy Creek Natural Area</li>
             <li>Sugar Hollow</li>
         </ul>
-</ul>
-<br>
-<h3>Routes @ University of Virginia:</h3>
-<ul class = "list-group">
-    <img src="{% static 'ada_app/images/routes.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
-    <img src="{% static 'ada_app/images/key.png' %}" style="width: 200px; height: auto;" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
-</ul>
-<br>
-<h3>Ramps @ University of Virginia:</h3>
-<p>Blue dots indicate locations with ramps</p>
-<ul class = "list-group">
-    <img src="{% static 'ada_app/images/ramps.png' %}" alt="Map displaying accessible, partially accessible, and non-accessible routes at the University of Virginia.">
 </ul>
 
 </div>
